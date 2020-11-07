@@ -22,7 +22,7 @@ public:
 	void writedata();
 	int owner_authen();
 	void display();
-	void searchModify();
+	void search();
 	void modify();
 };
 
@@ -227,48 +227,41 @@ void hospital::modify()
 		pack(s[j]);
 	fd.close();
 }
-void hospital::searchModify()
+void hospital::search()
 {
 	fstream fp;
-	char id[15], buff[45];
-	int i, j;
+	char id[15],buff[45];
+	int i,j;
 	record s;
-	fp.open(fname, ios::in);
-	if (!fp)
+	fp.open(fname,ios::in);
+	if(!fp)
 	{
-		cout << "\ncan not open file";
+		cout<<"\ncan not open file";
 		exit(0);
 	}
-	cout << "\nenter the ID to be searched:";
-	cin >> id;
-	i = 0;
-	while (1)
+	cout<<"\nenter the ID to be searched:";
+	cin>>id;
+	i=0;
+	fp.getline(buff,45);
+	s=unpack(buff);
+	while(1)
 	{
-		fp.getline(buff, 45, '*');
-		if (fp.eof())
-			break;
-		s = unpack(buff);
-		if (strcmp(s.id, id) == 0)
-		{
 
-			cout << "\nrecord found\n";
-			cout << "\nID:" << s.id;
-			cout << "\nName:" << s.name;
-			cout << "\nAge:" << s.age;
-			cout << "\nSex (M/F):" << s.sex;
-			cout << "\nContact:" << s.contact;
-			cout << "\nDiscription:" << s.discription;
-			cout << "\n";
-			cout<<"Add Description:";
-			char desc[10];
-			cin>>desc;
-			strcat(s.discription, " -> ");
-			strcat(s.discription, desc);
-			pack(s);
-			return;
+		if(fp.eof())
+			break;
+		if(strcmp(s.id,id)==0)
+		{
+			cout<<"\nrecord found\n";
+			cout<<"\nID:"<<s.id;
+			cout<<"\nName:"<<s.name;
+			cout<<"\nAge:"<<s.age;
+			cout<<"\nSex (M/F):"<<s.sex;
+			cout<<"\nContact:"<<s.contact;
+			cout<<"\nDescription:"<<s.discription;
 		}
+		fp.getline(buff,45);
+		s=unpack(buff);
 	}
-	cout << "\nrecord not found";
 	return;
 }
 
@@ -380,7 +373,7 @@ pay:
 
 	if(cash>=sumt)
 		cout<<"\n\t\t\tTotal cash repaid: "<<cash-sumt<<'\n';
-		
+
 	else
 	{	cout<<"\n\t\t\tCash given is less than total amount!!!";
 
@@ -487,7 +480,7 @@ int main()
 					obj.display();
 					break;
 				case 3:
-					obj.searchModify();
+					obj.search();
 					break;
 				case 4:
 					obj.modify();
@@ -508,12 +501,12 @@ int main()
 				 << "------------------------------------------------------------------------------------\n";
 		while (1)
 		{
-			obj.searchModify();
+			obj.search();
 		}
 		break;
 	case 3:
 		administration();
-		break;	
+		break;
 	default:
 		exit(0);
 	}
