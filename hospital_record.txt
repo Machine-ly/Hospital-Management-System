@@ -1,3 +1,4 @@
 1|asdf|22|M|3245456|32|zxcvb|*
 1|asdf|22|M|3245456|32|zxcvb -> asdfg|*
 1|asdf|22|M|3245456|32|zxcvb -> Corona|*
+1|asdf|22|M|3245456|32|zxcvb -> fever|*
