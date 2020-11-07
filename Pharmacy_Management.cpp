@@ -11,48 +11,48 @@
 using namespace std;
 
 
-class medicineType
+class Meds
 {
 public:
 
-    void take_order();
-    void delete_order(); 
-    void modify(); 
-	void order_list();
-	void daily_summary();
-	void exit(); 
+    void TakeOrder();
+    void DeleteOrder();
+    void modify();
+	void OrderList();
+	void Summary();
+	void exit();
 };
 
 
-struct node 
+struct node
 {
-	int reciept_number;
-	string customerName;
+	int RecieptNo;
+	string Costumer_Name;
 	string date;
-	int quantity[10];
-	int x, menu2[10];
-    double amount[10];
-    string medicineName[10]={"Probiotics","Vitamin C(500mg)","Acid Free C(500mg)","Women'S Multivate","Marino Tablet","Maxi Cal Tablet",
-	"Amino Zinc Tablet","Burnex","Fabuloss 5","Royal Propollen"};
-	double Medicine[10] = {2.00,3.00,1.00,4.00,1.00,5.00,7.00,4.00,3.00,5.00};
-	double total;
+	int quantity[20];
+	int x, menu2[20];
+    int amount[20];
+    string MedicineName[20]={"Humira", "Keytruda", "Revlimid", "Opdivo", "Eylea" ,"Eliquis", "Enbrel", "Avastin", "Stelara", "Rituxan", "Xarelto",
+                             "Herceptin" ,"Prevnar", "Imbruvica", "Remicade", "Ibrance", "Biktarvy", "Tecfidera", "Trulicity", "Genvoya"};
+	int Medicine[20] = {25,30,13,47,85,65,78,94,75,12,27,90,33,47,75,65,78,94,75,99};
+	int total;
 
-	node *prev;
+	node *prev;  // self referencial nodes
 	node *next;
-	node *link; 
+	node *link;
 
-}*q, *temp;			
+}*q, *temp;
 
 
-node *start_ptr = NULL;
+node *start = NULL;
 node *head = NULL;
 node *last = NULL;
 
-int main()	
+int main()
 {
 
-	system("COLOR 0");		
-	medicineType medicine;
+	system("COLOR 0");
+	Meds medicine;   // object of meds class
 	int menu;
 	do
 	{
@@ -75,52 +75,53 @@ int main()
 		{
 		case 1:
 			{
-				medicine.take_order();	
+				medicine.TakeOrder();
 				break;
 			}
-		
-		
+
+
 		case 2:
 			{
-				medicine.delete_order();	
+				medicine.DeleteOrder();
 				system("PAUSE");
 				break;
-			}	
-			
+			}
+
 		case 3:
 			{
 				medicine.modify();
 				system("PAUSE");
 				break;
-			}	
+			}
 
 		case 4:
 			{
-				medicine.order_list();	
+				medicine.OrderList();
 				system("PAUSE");
 				break;
-			}	
+			}
 		case 5:
 			{
-				medicine.daily_summary();	
+				medicine.Summary();
 				system("PAUSE");
 				break;
-			}	
+			}
         case 6:
 			{
-				medicine.exit();	
+				medicine.exit();
 				goto a;
 				break;
-			}	
+			}
 
-		
+
 		default:
 			{
 				cout<<"You enter invalid input\nre-enter the input\n"<<endl;
 				break;
 			}
 		}
-	}while(menu!=6);
+	}
+	while(menu!=6);    // DOUBT
 	a:
 	cout<<"thank you"<<endl;
 	system ("PAUSE");
@@ -128,7 +129,7 @@ int main()
 }
 
 
-void medicineType::take_order()		
+void Meds::TakeOrder()
 {
 	system("cls");
 	int i;
@@ -143,37 +144,37 @@ void medicineType::take_order()
 				cout <<"**************************************************************************\n";
 				cout<<"DRUGS ID"<<"\t\tDRUGS NAME"<<"\t\tDRUGS PRICE(Rs.)"<<endl;
 				cout <<"**************************************************************************\n";
-                cout<<" 1"<<"\t"<<"\t\tHumira    "<<"\t\tRs."<<endl;
-                cout<<" 2"<<"\t"<<"\t\tKeytruda  "<<"\t\tRs."<<endl;
-                cout<<" 3"<<"\t"<<"\t\tRevlimid  "<<"\t\tRs."<<endl;
-                cout<<" 4"<<"\t"<<"\t\tOpdivo    "<<"\t\tRs."<<endl;
-                cout<<" 5"<<"\t"<<"\t\tEylea     "<<"\t\tRs."<<endl;
-                cout<<" 6"<<"\t"<<"\t\tEliquis   "<<"\t\tRs."<<endl;
-                cout<<" 7"<<"\t"<<"\t\tEnbrel    "<<"\t\tRs."<<endl;
-                cout<<" 8"<<"\t"<<"\t\tAvastin   "<<"\t\tRs."<<endl;
-                cout<<" 9"<<"\t"<<"\t\tStelara   "<<"\t\tRs."<<endl;
-                cout<<"10"<<"\t"<<"\t\tRituxan   "<<"\t\tRs."<<endl;
-                cout<<"11"<<"\t"<<"\t\tXarelto   "<<"\t\tRs."<<endl;
-                cout<<"12"<<"\t"<<"\t\tHerceptin "<<"\t\tRs."<<endl;
-                cout<<"13"<<"\t"<<"\t\tPrevnar 13"<<"\t\tRs."<<endl;
-                cout<<"14"<<"\t"<<"\t\tImbruvica "<<"\t\tRs."<<endl;
-                cout<<"15"<<"\t"<<"\t\tRemicade  "<<"\t\tRs."<<endl;
-                cout<<"16"<<"\t"<<"\t\tIbrance   "<<"\t\tRs."<<endl;
-                cout<<"17"<<"\t"<<"\t\tBiktarvy  "<<"\t\tRs."<<endl;
-                cout<<"18"<<"\t"<<"\t\tTecfidera "<<"\t\tRs."<<endl;
-                cout<<"19"<<"\t"<<"\t\tTrulicity "<<"\t\tRs."<<endl;
-                cout<<"20"<<"\t"<<"\t\tGenvoya   "<<"\t\tRs."<<endl;
+                cout<<" 1"<<"\t"<<"\t\tHumira    "<<"\t\tRs.25"<<endl;
+                cout<<" 2"<<"\t"<<"\t\tKeytruda  "<<"\t\tRs.30"<<endl;
+                cout<<" 3"<<"\t"<<"\t\tRevlimid  "<<"\t\tRs.13"<<endl;
+                cout<<" 4"<<"\t"<<"\t\tOpdivo    "<<"\t\tRs.47"<<endl;   //25,30,13,47,85,65,78,94,75,12,27,90,33,47,75,65,78,94,75,99
+                cout<<" 5"<<"\t"<<"\t\tEylea     "<<"\t\tRs.85"<<endl;
+                cout<<" 6"<<"\t"<<"\t\tEliquis   "<<"\t\tRs.65"<<endl;
+                cout<<" 7"<<"\t"<<"\t\tEnbrel    "<<"\t\tRs.78"<<endl;
+                cout<<" 8"<<"\t"<<"\t\tAvastin   "<<"\t\tRs.94"<<endl;
+                cout<<" 9"<<"\t"<<"\t\tStelara   "<<"\t\tRs.75"<<endl;
+                cout<<"10"<<"\t"<<"\t\tRituxan   "<<"\t\tRs.12"<<endl;
+                cout<<"11"<<"\t"<<"\t\tXarelto   "<<"\t\tRs.27"<<endl;
+                cout<<"12"<<"\t"<<"\t\tHerceptin "<<"\t\tRs.90"<<endl;
+                cout<<"13"<<"\t"<<"\t\tPrevnar 13"<<"\t\tRs.33"<<endl;
+                cout<<"14"<<"\t"<<"\t\tImbruvica "<<"\t\tRs.47"<<endl;
+                cout<<"15"<<"\t"<<"\t\tRemicade  "<<"\t\tRs.75"<<endl;
+                cout<<"16"<<"\t"<<"\t\tIbrance   "<<"\t\tRs.65"<<endl;
+                cout<<"17"<<"\t"<<"\t\tBiktarvy  "<<"\t\tRs.78"<<endl;
+                cout<<"18"<<"\t"<<"\t\tTecfidera "<<"\t\tRs.94"<<endl;
+                cout<<"19"<<"\t"<<"\t\tTrulicity "<<"\t\tRs.75"<<endl;
+                cout<<"20"<<"\t"<<"\t\tGenvoya   "<<"\t\tRs.99"<<endl;
                 cout<<" "<<endl;
-    
+
 	temp = new node;
 	cout << "Type Order no: ";
-    cin >> temp->reciept_number;
+    cin >> temp->RecieptNo;
 	cout<< "Enter Customer Name: ";
-	cin>> temp->customerName;
+	cin>> temp->Costumer_Name;
 	cout<<"Enter Date : ";
 	cin>>temp->date;
 	cout << "How many Medicine would you like to order:"<< endl;
-	cout<<"( Maximum is 10 order for each transaction ) \n";
+	cout<<"( Maximum is 20 order for each transaction ) \n";
 	cout << "  " ;
 	cin >> temp->x;
 	if (temp->x >20)
@@ -184,16 +185,16 @@ void medicineType::take_order()
 	else{
 	for (i=0; i<temp->x; i++)
 	{
-		
+
 		cout << "Please enter your selection : "<<endl;
 		cin>> temp->menu2[i];
-        cout<< "Medicine Name: " <<temp->medicineName[temp->menu2[i]-1]<<endl;
+        cout<< "Medicine Name: " <<temp->MedicineName[temp->menu2[i]-1]<<endl;
         cout << "How many medicine do you want: ";
         cin >> temp->quantity[i];
         temp->amount[i] = temp->quantity[i] * temp->Medicine[temp->menu2[i]-1];
         cout << "Amount for this Medicine: " << temp->amount[i]<<" Rs."<<endl;
         system("PAUSE");
-                      
+
 	}
 	cout<<"==========================================================================="<<endl;
     cout << "Order Taken Successfully"<<endl;
@@ -203,31 +204,31 @@ void medicineType::take_order()
 	system ("PAUSE");
 
     temp->next=NULL;
-	if(start_ptr!=NULL)
+	if(start!=NULL)
 	{
-		temp->next=start_ptr;
+		temp->next=start;
 	}
-	start_ptr=temp;
+	start=temp;
 	system("cls");
 }
 }
 
 
-void medicineType::order_list()
+void Meds::OrderList()
 {
-	int i, num, num2;	
-	bool found;			 
+	int i, num, num2;
+	bool found;
 	system("cls");
 	node *temp;
 
-	temp=start_ptr;
+	temp=start;
 	found = false;
-	
+
 	cout<<" Enter the Reciept Number To Print The Reciept\n";
 	cin>>num2;
 	cout<<"\n";
 	cout<<"==========================================================================="<<endl;
-	cout <<"\t\tHere is the Order list\n"; 
+	cout <<"\t\tHere is the Order list\n";
 	cout<<"==========================================================================="<<endl;
 
 
@@ -237,7 +238,7 @@ void medicineType::order_list()
 	}
 	while(temp !=NULL && !found)
 	{
-		if (temp->reciept_number==num2)
+		if (temp->RecieptNo==num2)
 		{
 			found = true;
 		}
@@ -245,27 +246,27 @@ void medicineType::order_list()
 		{
 			temp = temp -> next;
 		}
-        if (found)	
+        if (found)
         {
-		cout <<"Reciept Number : "<<temp->reciept_number;
+		cout <<"Reciept Number : "<<temp->RecieptNo;
 		cout <<"\n";
-		cout<<"Customer Name: "<<temp->customerName<<endl;
-				
+		cout<<"Customer Name: "<<temp->Costumer_Name<<endl;
+
 		cout<<"Order Date : "<<temp->date<<endl;
-				
+
 		cout<<"_____________________________________________________________________________"<<endl;
-			
+
 		cout << "===============================================================================" << endl;
 		cout << "|  Medicine Name    |  	Quantity     |    Total Price |" << endl;
 		cout << "=======++==================++================++===============++===============" << endl;
 		for (i=0;i<temp->x;i++)
 		{
-			cout<<temp->medicineName[temp->menu2[i]-1]<<"\t\t\t  ";
+			cout<<temp->MedicineName[temp->menu2[i]-1]<<"\t\t\t  ";
 			cout<<temp->quantity[i] <<"\t\t";
-			cout<< temp->amount[i]<<" RM"<<endl;
+			cout<< temp->amount[i]<<" Rs."<<endl;
 			cout<<"_________________________________________________________________________________"<<endl;
 		}
-		
+
 		temp->total = temp->amount[0]+temp->amount[1]+temp->amount[2]+temp->amount[3]+temp->amount[4]+temp->amount[5]+temp->amount[6]+temp->amount[7]
 						+temp->amount[8]+temp->amount[9];
 		cout<<"Total Bill is : "<<temp->total;
@@ -281,10 +282,10 @@ void medicineType::order_list()
 
 
 }
-}	
+}
 
 
-void medicineType::delete_order()	
+void Meds::DeleteOrder()
 {
 	system("cls");
 	int i, num, count;
@@ -294,16 +295,16 @@ void medicineType::delete_order()
 	node *temp;
 	bool found;
 
-	if(start_ptr == NULL)
+	if(start == NULL)
 		cerr<<"Can not delete from an empty list.\n";
 	else
 	{
-		if(start_ptr->reciept_number == num)
+		if(start->RecieptNo == num)
 		{
-			q = start_ptr;
-			start_ptr = start_ptr->next;
+			q = start;
+			start = start->next;
 			count--;
-			if(start_ptr == NULL)
+			if(start == NULL)
 			last = NULL;
 			delete q;
 			cout<<"The Reciept is Deleted Successfully"<<endl;
@@ -311,12 +312,12 @@ void medicineType::delete_order()
 		else
 		{
 			found = false;
-			temp = start_ptr;
-			q = start_ptr->next;
-	
+			temp = start;
+			q = start->next;
+
 		while((!found) && (q != NULL))
 		{
-  			if(q->reciept_number != num) 
+  			if(q->RecieptNo != num)
 			{
 				temp = q;
 				q = q-> next;
@@ -330,7 +331,7 @@ void medicineType::delete_order()
 				temp->next = q->next;
 				count--;
 
-				if(last == q) 
+				if(last == q)
 				last = temp;
 				delete q;
 				cout<<"The Reciept is Deleted Successfully"<<endl;
@@ -338,18 +339,18 @@ void medicineType::delete_order()
 			else
 				cout<<"Item to be deleted is not in the list."<<endl;
 			}
-		} 
-}	
+		}
+}
 
 
 
-void medicineType::modify()	
+void Meds::modify()
 {
  system("cls");
  int i, ch, sid;
  bool found;
  found = false;
- temp = start_ptr;
+ temp = start;
  cout<<"Enter Receipt Number To Modify: ";
  cin>>sid;
  if (temp==NULL && sid==0)
@@ -361,7 +362,7 @@ void medicineType::modify()
  {
  	while(temp !=NULL && !found)
 	{
-		if (temp->reciept_number==sid)
+		if (temp->RecieptNo==sid)
 		{
 			found = true;
 		}
@@ -372,16 +373,16 @@ void medicineType::modify()
     if (found)
     {
 	cout << "Change  Order Number: ";
-    cin >> temp->reciept_number;
+    cin >> temp->RecieptNo;
 	cout<< "Change Customer Name: ";
-	cin>> temp->customerName;
+	cin>> temp->Costumer_Name;
 	cout<<"Change Date : ";
 	cin>>temp->date;
 	cout << "How many New Medicine would you like to Change:"<< endl;
-	cout<<"( Maximum is 10 order for each transaction ) \n";
+	cout<<"( Maximum is 20 order for each transaction ) \n";
 	cout << "  " ;
 	cin >> temp->x;
-	if (temp->x >10)
+	if (temp->x >20)
 	{
 		cout << "The Medicine you order is exceed the maximum amount of order !";
 		system("pause");
@@ -389,10 +390,10 @@ void medicineType::modify()
 	else{
 	for (i=0; i<temp->x; i++)
 	{
-		
+
 		cout << "Please enter your selection to Change: "<<endl;
 		cin>> temp->menu2[i];
-        cout<< "Change Medicine Name: " <<temp->medicineName[temp->menu2[i]-1]<<endl;
+        cout<< "Change Medicine Name: " <<temp->MedicineName[temp->menu2[i]-1]<<endl;
         cout << "How many New medicine do you want: ";
         cin >> temp->quantity[i];
         temp->amount[i] = temp->quantity[i] * temp->Medicine[temp->menu2[i]-1];
@@ -401,14 +402,14 @@ void medicineType::modify()
 	}
 	temp = temp->next;
 	system("cls");
-	
+
 	}
 
  cout<<"RECORD MODIFIED....!"<<endl;
  }
- else 
+ else
  {
- 	if(temp != NULL && temp->reciept_number != sid)
+ 	if(temp != NULL && temp->RecieptNo != sid)
  	{
  	cout<<"Invalid Reciept Number...!"<<endl;
     }
@@ -419,13 +420,13 @@ void medicineType::modify()
 
 
 
-void medicineType::daily_summary()
+void Meds::Summary()
 {
 	int i,num;
 	system("cls");
 	node *temp ;
 
-	temp=start_ptr;
+	temp=start;
 
 
 	if(temp == NULL)
@@ -441,39 +442,39 @@ void medicineType::daily_summary()
 
 		while(temp!=NULL)
 		{
-		
-				cout <<"Reciept Number : "<<temp->reciept_number;
+
+				cout <<"Reciept Number : "<<temp->RecieptNo;
 				cout <<"\n";
-				cout<<"Customer Name: "<<temp->customerName<<endl;
-				
+				cout<<"Customer Name: "<<temp->Costumer_Name<<endl;
+
 				cout<<"Order Date : "<<temp->date<<endl;
-				
+
 				cout<<"____________________________________________________________________________"<<endl;
-			
+
 				cout << "==========================================================================" << endl;
 				cout << "|  Medicine Name    |    Quantity     |    Total Price |" << endl;
 				cout << "=======++==================++================++===============++==========" << endl;
 			for (i=0;i<temp->x;i++)
 			{
-				cout<<temp->medicineName[temp->menu2[i]-1]<<"\t\t";
+				cout<<temp->MedicineName[temp->menu2[i]-1]<<"\t\t";
 				cout<<temp->quantity[i] <<"\t\t";
 				cout<< temp->amount[i]<<" RM"<<endl;
 				cout<<"_____________________________________________________________________________"<<endl;
 			}
-			
+
 			temp->total = temp->amount[0]+temp->amount[1]+temp->amount[2]+temp->amount[3]+temp->amount[4]+temp->amount[5]+temp->amount[6]+temp->amount[7]
 			+temp->amount[8]+temp->amount[9];
 			cout<<"Total Bill is : "<<temp->total;
-		
+
 			cout <<"\n";
 			cout <<"\n";
 			cout <<"\n_______________________________________________________________________________\n";
-				
+
 			temp=temp->next;
 		}
 	}
-}	
-void medicineType::exit() 
+}
+void Meds::exit()
 {
 	cout<<"\nYou choose to exit.\n"<<endl;
-}	
+}
